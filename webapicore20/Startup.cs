@@ -18,20 +18,10 @@ namespace webapicore20
         {
 
             var builder = services.AddMvcCore();
-
-            //builder.AddApiExplorer();
-
-            //builder.AddAuthorization();
-
-            //builder.AddFormatterMappings();
-
-            //builder.AddDataAnnotations();
-
+            
             builder.AddJsonFormatters();
             
             builder.AddCors();
-            
-            //var builder = services.AddMvc();
 
         }
 
