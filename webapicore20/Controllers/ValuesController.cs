@@ -6,14 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace webapicore20.wwwroot
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        // GET api/values/GetSomeJson
         [HttpGet]
+        [ActionName("GetSomeJson")]
         public IActionResult Get()
         {
-            return Ok(new string[] { "value1", "value2" });
+            var result = @"{'name':'John','age':30,'cars':['Ford','BMW','Fiat']}";
+            return Ok(result);
         }
     }
 }
