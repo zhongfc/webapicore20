@@ -7,28 +7,49 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using webapicore20.Models;
+using webapicore20.Data;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace webapicore20
 {
     public class Startup
     {
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public IServiceProvider ConfigureServices(IServiceCollection services)
+        {            
+            // Services
+            services.AddDbContext<SchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
+                .AddMvcCore()
+                .AddJsonFormatters()
+                .AddCors();
 
-            var builder = services.AddMvcCore();
+            // Build the intermediate service provider
+            var serviceProvider = services.BuildServiceProvider();
             
-            builder.AddJsonFormatters();
-            
-            builder.AddCors();
-
+            //return the provider
+            return serviceProvider;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, 
+            SchoolContext context, IServiceProvider serviceProvider)
         {
-            
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -40,6 +61,10 @@ namespace webapicore20
             //});
 
             app.UseMvc();
+
+            //resolve dependencies
+            DbInitializer.Initialize(context);
+
         }
     }
 }
