@@ -5,3 +5,5 @@
 > This simple webapi has been created with Visual Studio 2017 Preview 15.3 using ASP.NET Core Web Application (.NET Core) \- ASP.NET Core 2.0 \- Empty Template
 
 > Just Web API, no MVC dependencies like Razor, tag helpers, etc.
+
+> [Published in Azure](http://webapicore20.azurewebsites.net/api/values/GetSomeJson)
