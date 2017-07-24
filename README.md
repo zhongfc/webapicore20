@@ -7,3 +7,12 @@
 > Just Web API, no MVC dependencies like Razor, tag helpers, etc.
 
 > [Published in Azure](http://webapicore20.azurewebsites.net/api/values/GetSomeJson)
+
+------
+
+## EF Core version
+
+> Added EF Core 2.0 Preview 2 with an existent Azure DataBase - Student Table
+
+> [Published in Azure](http://webapicore20.azurewebsites.net/api/Students/GetStudents)
+
