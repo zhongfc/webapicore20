@@ -12,7 +12,7 @@
 
 ------
 
-## EF Core version
+## EF Core version https://github.com/axelvitali/webapicore20/tree/62d4980b5392abd361c2598eb88cfcd695c016be
 
 > Added EF Core 2.0 Preview 2 with an existent Azure DataBase - Student Table
 
