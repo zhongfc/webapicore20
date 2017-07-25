@@ -18,3 +18,11 @@
 
 > [Published in Azure](http://webapicore20.azurewebsites.net/api/Students/GetStudents)
 
+------
+
+## Service and Repository Layers added version https://github.com/axelvitali/webapicore20/tree/5fbc78ec4b2f5e92e16d06979db7f765e3e0f02d
+
+> Added Service and Repository layers
+
+> [Published in Azure](http://webapicore20.azurewebsites.net/api/Students/GetStudents)
+
