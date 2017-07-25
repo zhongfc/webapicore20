@@ -5,18 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using webapicore20.Data;
 using Microsoft.EntityFrameworkCore;
+using webapicore20.Interfaces;
 
 namespace webapicore20.wwwroot
 {
     [Route("api/[controller]/[action]")]
     public class StudentsController : ControllerBase
     {
+        private readonly ISchoolService _SchoolService;
 
-        private readonly SchoolContext _context;
-
-        public StudentsController(SchoolContext context)
+        public StudentsController(ISchoolService SchoolService)
         {
-            _context = context;
+            _SchoolService = SchoolService; 
+
         }
 
         // GET api/values/GetSomeJson
@@ -31,9 +32,9 @@ namespace webapicore20.wwwroot
         //GET api/Students/GetStudents
         [HttpGet]
         [ActionName("GetStudents")]
-        public async Task<IActionResult> Getstudents()
+        public IActionResult Getstudents()
         {
-            return Ok(await _context.Students.ToListAsync());
+            return Ok(_SchoolService.GetStudent());
         }
 
     }

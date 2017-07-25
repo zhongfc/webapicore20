@@ -12,6 +12,9 @@ using webapicore20.Models;
 using webapicore20.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
+using webapicore20.Interfaces;
+using webapicore20.Services;
+using webapicore20.Repositories;
 
 namespace webapicore20
 {
@@ -29,12 +32,16 @@ namespace webapicore20
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public IServiceProvider ConfigureServices(IServiceCollection services)
-        {            
+        {
             // Services
             services.AddDbContext<SchoolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")))
                 .AddMvcCore()
                 .AddJsonFormatters()
                 .AddCors();
+
+            // //resolve dependency injections (service + repository)
+            services.AddScoped<ISchoolService, SchoolService>();
+            services.AddScoped<ISchoolRepository, SchoolRepository>();
 
             // Build the intermediate service provider
             var serviceProvider = services.BuildServiceProvider();
